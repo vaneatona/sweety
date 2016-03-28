@@ -26,29 +26,3 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
-
-
-A user should be able to view reports of their data.
-
-With a date selector, the user should be able to select the
-end date of the report. There are three kinds of reports:
-
-daily: data will represent entries from that day.
-
-monthly: reports will include data spanning the month the previous monthly period.
-
-month to date: data will start on the first of the month for the selected date and end on that date.
-
-Reports should include three data points:
-
-a maximum reading from the time period,
-a minimum reading for the time period,
-and an average of the whole data set for the period.
-
-
-
-Running via Spring preloader in process 27127
-      create  .rspec
-      create  spec
-      create  spec/spec_helper.rb
-      create  spec/rails_helper.rb
