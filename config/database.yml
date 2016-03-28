@@ -24,8 +24,8 @@ production:
   <<: *default
   adapter: mysql2
   encoding: utf8
-  database: my_db_name
-  username: root
-  password: my_password
-  host: 127.0.0.1
-  port: 3300
+  database: ENV["MYSQL_DATABASE"]
+  username: ENV["MYSQL_USERNAME"]
+  password: ENV["MYSQL_PASSWORD"]
+  host: ENV["MYSQL_HOST"]
+  port: ENV["MYSQL_PORT"]
