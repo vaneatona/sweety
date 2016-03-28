@@ -1,0 +1,18 @@
+<div class="page-header"><h1>Register</h1></div>
+
+<%= form_for @user do |f| %>
+  <%= render 'shared/errors', object: @user %>
+
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, class: 'form-control' %>
+
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control' %>
+
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+  </div>
+
+  <%= f.submit 'Register', class: 'btn btn-primary btn-lg' %>
+<% end %>

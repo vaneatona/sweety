@@ -1,0 +1,73 @@
+class ReadingsController < ApplicationController
+  before_filter :access_denied, :unless => :is_owner?
+
+  def index
+    @user = User.find(params[:user_id])
+    @readings = @user.readings
+  end
+
+  def show
+    @user = User.find(params[:user_id])
+    @reading = @user.readings.find(params[:id])
+  end
+
+  def new
+    # Retrieve the user this is being created for with params[:post_id]
+    # May not always be current_user
+    @user = User.find(params[:user_id])
+
+    # Check for over daily limit
+    if error = Reading.over_daily_readings_limit(@user)
+      redirect_to user_readings_path, error
+    else
+      # It's good, we proceed with creation
+      @reading = @user.readings.build
+    end
+  end
+
+  def edit
+    @user = User.find(params[:user_id])
+    @reading = @user.readings.find(params[:id])
+  end
+
+  def create
+    # Retrieve the user this is being created for with params[:post_id]
+    # May not always be current_user
+    @user = User.find(params[:user_id])
+
+    @reading = @user.readings.build(reading_params)
+
+    # Check for over daily limit
+    if error = Reading.over_daily_readings_limit(@user)
+      redirect_to user_readings_path, error
+    elsif @reading.save
+      redirect_to user_readings_path
+    else
+      render 'new'
+    end
+  end
+
+  def update
+    @reading = Reading.find(params[:id])
+
+    if @reading.update(reading_params)
+      redirect_to ([@reading.user, @reading])
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @reading = Reading.find(params[:id])
+    @reading.destroy
+
+    redirect_to user_readings_path
+  end
+
+  private
+    def reading_params
+      massAssignable = [:title, :blood_sugar]
+      params.require(:reading).permit(massAssignable)
+    end
+
+end

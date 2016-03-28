@@ -1,0 +1,9 @@
+<h1>Reports#monthly</h1>
+<p>Find me in app/views/reports/monthly.html.erb</p>
+
+<%= render "readings/readings_table", objects: @report  %>
+<%= render 'report', reportObject: @report %>
+
+<%= render 'datepicker' %>
+
+<%= link_to 'Back to Readings', user_readings_path(@user) %>

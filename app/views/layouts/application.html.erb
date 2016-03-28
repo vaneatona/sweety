@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sweety</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <%= link_to 'Sweety', root_path, class: 'navbar-brand' %>
+            </div>
+            <div id="navbar">
+                <ul class="nav navbar-nav">
+                    <li><%= link_to 'Home', root_path %></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <% if current_user %>
+                        <li><%= link_to current_user, user_path(current_user) %></li>
+                        <li><%= link_to 'Sign Out', sign_out_path, method: :delete %></li>
+                    <% else %>
+                        <li><%= link_to 'Sign In', sign_in_path %></li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>">
+                <%= value %>
+            </div>
+        <% end %>
+
+        <%= yield %>
+    </div>
+
+</body>
+</html>

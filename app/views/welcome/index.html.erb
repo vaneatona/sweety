@@ -1,0 +1,16 @@
+<h1>Welcome#index</h1>
+
+<% if current_user %>
+  <div class="page-header"><h1>Welcome back!</h1></div>
+  <%= link_to 'My blood sugar levels!', user_readings_path(current_user) %>
+
+<% else %>
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Welcome!</h1>
+      <p>Sign up to get started.</p>
+      <p>
+        <%= link_to "Sign Up #{right_arrow_icon}".html_safe, new_user_path, class: 'btn btn-primary btn-lg', id: 'sign-up' %>
+      </p>
+  </div>
+<% end %>

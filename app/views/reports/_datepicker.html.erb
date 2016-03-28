@@ -1,0 +1,28 @@
+<%= form_tag(method: "post") do %>
+  <div class="input-group date" id="datepicker">
+    <input type="text" class="form-control" name="report_end">
+      <span class="input-group-addon">
+        <i class="glyphicon glyphicon-calendar"></i>
+      </span>
+  </div>
+  <input type="submit" class="btn btn-primary" value="Update Report">
+<% end %>
+
+<ul>
+  <li>Report End: <%= @report_end %></li>
+</ul>
+
+<ul>
+  <li>Oldest Report Date: <%= @readings.oldest_report %></li>
+  <li>Newest Report Date: <%= @readings.newest_report %></li>
+</ul>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.input-group.date').datepicker({
+      format: "dd/mm/yyyy",
+      startDate: "<%= @readings.oldest_report %>",
+      endDate: "<%= @readings.newest_report %>"
+    });
+  });
+</script>

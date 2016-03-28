@@ -1,0 +1,24 @@
+<%= form_tag(method: "post") do %>
+<div class="input-daterange input-group" id="datepicker">
+    <input type="text" class="input-sm form-control" name="report_start" />
+    <span class="input-group-addon">to</span>
+    <input type="text" class="input-sm form-control" name="report_end" />
+</div>
+<input type="submit" class="btn btn-primary" value="Update Report">
+<% end %>
+
+Start: <%= @report_start %>
+End: <%= @report_end %>
+
+Startdate: <%= @oldest_rep %>
+EndDate: <%= @newest_rep %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.input-daterange').datepicker({
+      format: "dd/mm/yyyy",
+      startDate: "<%= @readings.oldest_report %>",
+      endDate: "<%= @readings.newest_report %>"
+    });
+  });
+</script>

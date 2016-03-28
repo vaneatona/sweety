@@ -1,0 +1,25 @@
+<table class="table">
+  <tr>
+    <th>Title</th>
+    <th>Blood Sugar</th>
+    <th>User</th>
+    <th>Created</th>
+    <th colspan="3"><%= new_report_link(@user) %></th>
+  </tr>
+
+  <% if objects.present? %>
+    <% objects.each do |object| %>
+      <tr>
+        <td><%= object.title %></td>
+        <td><%= "#{object.blood_sugar} mg/dl" %></td>
+        <td><%= object.user %></td>
+        <td><%= "#{time_ago_in_words(object.created_at)} ago" %></td>
+        <td><%= link_to show_icon, [object.user, object] %></td>
+        <td><%= link_to edit_icon, [:edit, object.user, object] %></td>
+        <td><%= link_to delete_icon, [object.user, object], method: :delete %></td>
+      </tr>
+    <% end %>
+  <% else %>
+    <p>There are no readings to process. <%= new_report_link(@user) %></p>
+  <% end %>
+</table>

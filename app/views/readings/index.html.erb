@@ -1,0 +1,19 @@
+<h1>Listing readings</h1>
+
+<%= render "readings_table", objects: @readings  %>
+
+<div>
+  <% if @user.readings.count > 0 %>
+    <%= link_to 'Daily Report', 'readings/reports/daily' %>
+  <% end %>
+</div>
+<div>
+  <% if @user.readings.count > 0 %>
+    <%= link_to 'Monthly Report', 'readings/reports/monthly' %>
+  <% end %>
+</div>
+<div>
+  <% if @user.readings.count > 0 %>
+    <%= link_to 'MonthToDate Report', 'readings/reports/monthToDate' %>
+  <% end %>
+</div>

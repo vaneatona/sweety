@@ -1,0 +1,9 @@
+<h1>Reports#monthToDate</h1>
+<p>Find me in app/views/reports/monthToDate.html.erb</p>
+
+<%= render "readings/readings_table", objects: @report  %>
+<%= render 'report', reportObject: @report %>
+
+<%= render 'datepicker_range' %>
+
+<%= link_to 'Back to Readings', user_readings_path(@user) %>
