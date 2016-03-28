@@ -40,6 +40,9 @@ gem 'scrypt'
 # Databases and stuff
 gem 'mysql2'
 
+# Allows using ENV files, rather than putting passwords in git
+gem 'figaro'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
