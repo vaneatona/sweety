@@ -3,43 +3,7 @@ require 'rails_helper'
 RSpec.describe ReportsController, type: :controller do
   before(:each) do
     activate_authlogic
-    @newUser = User.create!(
-      id: '1',
-      email: 'hooa@aol.com',
-      password: 'secret1',
-      password_confirmation: 'secret1'
-    )
-    log_in(@newUser)
-    @newReading = @newUser.readings.create!(
-      title: 'fakereading1',
-      blood_sugar: '5',
-      created_at: Time.now,
-      user_id: @newUser.id
-    )
-    @newReading2 = @newUser.readings.create!(
-      title: 'fakereading2 - correct',
-      blood_sugar: '5',
-      created_at: 2.days.ago,
-      user_id: @newUser.id
-    )
-    @newReading3 = @newUser.readings.create!(
-      title: 'fakereading3 - correct',
-      blood_sugar: '5',
-      created_at: 2.days.ago,
-      user_id: @newUser.id
-    )
-    @newReading4 = @newUser.readings.create!(
-      title: 'fakereading4',
-      blood_sugar: '5',
-      created_at: 5.days.ago,
-      user_id: @newUser.id
-    )
-    @newReading5 = @newUser.readings.create!(
-      title: 'fakereading4',
-      blood_sugar: '5',
-      created_at: 2.months.ago,
-      user_id: @newUser.id
-    )
+    @newUser = create :user_with_many_readings_created_from_all_dates
   end
 
   describe "GET #daily" do
@@ -57,8 +21,11 @@ RSpec.describe ReportsController, type: :controller do
     end
 
     it "it returns reports from selected day only" do
+      reading1 = create :reading, { user: @newUser, created_at: 2.days.ago }
+      reading2 = create :reading, { user: @newUser, created_at: 2.days.ago }
+
       get :daily, {:user_id => @newUser.id, :report_end => 2.days.ago}
-      expect(assigns(:report)).to contain_exactly(@newReading2, @newReading3)
+      expect(assigns(:report)).to contain_exactly(reading1, reading2)
     end
   end
 
@@ -77,8 +44,11 @@ RSpec.describe ReportsController, type: :controller do
     end
 
     it "it returns reports from selected month only" do
-     get :monthly, {:user_id => @newUser.id, :report_end => 2.months.ago}
-      expect(assigns(:report)).to contain_exactly(@newReading5)
+      reading1 = create :reading, { user: @newUser, created_at: 2.months.ago }
+      reading2 = create :reading, { user: @newUser, created_at: 2.months.ago }
+
+      get :monthly, {:user_id => @newUser.id, :report_end => 2.months.ago}
+      expect(assigns(:report)).to contain_exactly(reading1, reading2)
     end
 
   end
@@ -100,8 +70,11 @@ RSpec.describe ReportsController, type: :controller do
     end
 
     it "it returns reports from selected range only" do
-     get :monthToDate, {:user_id => @newUser.id, :report_end => 2.days.ago, :report_start => 5.days.ago}
-      expect(assigns(:report)).to contain_exactly(@newReading2, @newReading3, @newReading4)
+      reading1 = create :reading, { user: @newUser, created_at: 3.days.ago }
+      reading2 = create :reading, { user: @newUser, created_at: 4.days.ago }
+
+      get :monthToDate, {:user_id => @newUser.id, :report_end => 2.days.ago, :report_start => 5.days.ago}
+      expect(assigns(:report)).to contain_exactly(reading1, reading2)
     end
   end
 
