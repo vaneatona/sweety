@@ -36,35 +36,42 @@ RSpec.describe ReadingsController do
 
   describe "GET #new" do
     let(:newUser) { create :user_with_readings }
+    let(:differentUser) { create :user_with_many_readings }
 
     it "it renders the new template" do
       get :new, {:user_id => newUser.id}
       expect(response).to render_template(:new)
     end
-  end
-
-  describe "GET #new" do
-    let(:newUser) { create :user_with_many_readings }
 
     it "it redirects if you are above daily reading limit" do
-      get :new, {:user_id => newUser.id}
-      expect(response).to redirect_to user_readings_path(newUser)
+      get :new, {:user_id => differentUser.id}
+      expect(response).to redirect_to user_readings_path(differentUser)
     end
   end
 
-  # describe "GET #edit" do
-  #   it "returns http success" do
-  #     get :edit
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
+  describe "GET #edit" do
+    let(:newUser) { create :user_with_readings }
 
-  # describe "GET #create" do
-  #   it "returns http success" do
-  #     get :create
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
+    it "it renders the edit template" do
+      get :new, {:user_id => newUser.id}
+      expect(response).to render_template(:new)
+    end
+  end
+
+  describe "GET #create" do
+    let(:newUser) { create :user_with_readings }
+    let(:attrs) { attributes_for(:reading) }
+
+    it "creates a new reading" do
+      # setup
+      userReadings = newUser.readings
+
+      expect{
+        post :create, {:user_id => newUser.id, :reading => attrs}
+      }.to change(userReadings, :count).by(1)
+    end
+  end
+
 
   # describe "GET #update" do
   #   it "returns http success" do

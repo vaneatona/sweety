@@ -20,10 +20,12 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "POST #create" do
-    let(:attrs)  { attributes_for(:user) }
+    let(:attrs) { attributes_for(:user) }
 
     it "it creates a user and redirects to readings" do
-      expect{ post :create, :user => attrs }.to change(User, :count).by(1)
+      expect{
+        post :create, user: attrs
+      }.to change(User, :count).by(1)
     end
   end
 

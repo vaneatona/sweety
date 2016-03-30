@@ -9,12 +9,12 @@ RSpec.feature "UsersDoThings" do
   end
 
   describe "users have readings," do
-
     it "they can see their readings" do
       expect(page).to have_content 'Fancy Reading'
     end
 
     it "they can view only their own readings" do
+      # setup
       differentUser = create :user_with_readings
 
       visit user_readings_path(differentUser)
@@ -23,6 +23,7 @@ RSpec.feature "UsersDoThings" do
     end
 
     it "they can create them" do
+      # setup
       stub = build_stubbed(:reading, user: @newUser)
 
       click_link("New Reading")
@@ -38,6 +39,7 @@ RSpec.feature "UsersDoThings" do
     end
 
     it "they can edit them" do
+      # setup
       stub = build_stubbed(:reading, title: 'edited-title')
 
       first(:link, 'edit-reading').click # new
@@ -47,6 +49,7 @@ RSpec.feature "UsersDoThings" do
     end
 
     it "they can delete readings" do
+      # setup, we need to ensure we know the title of this one
       reading1 = create :reading, { user: @newUser, title: 'DELETE ME!' }
 
       visit current_path

@@ -29,27 +29,13 @@ FactoryGirl.define do
     factory :user_with_many_readings_created_from_all_dates do
       after(:create) do |user|
         create_list(:reading, 2, { user: user, created_at: Time.now, title: 'now' })
-        # create_list(:reading, 2, { user: user, created_at: 2.days.ago, title: '2daysago' })
+        create_list(:reading, 2, { user: user, created_at: 1.days.ago, title: '1daysago' })
         create_list(:reading, 2, { user: user, created_at: 1.week.ago, title: '1weekago' })
         create_list(:reading, 2, { user: user, created_at: 1.month.ago, title: '1monthago' })
-        # create_list(:reading, 2, { user: user, created_at: 2.months.ago, title: '2monthsago' })
+        create_list(:reading, 2, { user: user, created_at: 3.months.ago, title: '3monthsago' })
       end
     end
 
   end
 
 end
-
-# #factory :article do
-#   body 'password'
-
-#   factory :article_with_comment do
-#     after(:create) do |article|
-#       create(:comment, article: article)
-#     end
-#   end
-# end
-
-# factory :comment do
-#   body 'Great article!'
-# end
