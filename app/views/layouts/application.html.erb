@@ -20,9 +20,9 @@
                 <ul class="nav navbar-nav navbar-right">
                     <% if current_user %>
                         <li><%= link_to current_user, user_path(current_user) %></li>
-                        <li><%= link_to 'Sign Out', sign_out_path, method: :delete %></li>
+                        <li><%= link_to 'Sign Out', sign_out_path, method: :delete, id: 'sign-out' %></li>
                     <% else %>
-                        <li><%= link_to 'Sign In', sign_in_path %></li>
+                        <li><%= link_to 'Sign In', sign_in_path, id: 'sign-in' %></li>
                     <% end %>
                 </ul>
             </div>

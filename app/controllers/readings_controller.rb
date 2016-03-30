@@ -18,7 +18,7 @@ class ReadingsController < ApplicationController
 
     # Check for over daily limit
     if error = Reading.over_daily_readings_limit(@user)
-      redirect_to user_readings_path, error
+      redirect_to user_readings_path(@user), error
     else
       # It's good, we proceed with creation
       @reading = @user.readings.build
@@ -39,9 +39,9 @@ class ReadingsController < ApplicationController
 
     # Check for over daily limit
     if error = Reading.over_daily_readings_limit(@user)
-      redirect_to user_readings_path, error
+      redirect_to user_readings_path(@user), error
     elsif @reading.save
-      redirect_to user_readings_path
+      redirect_to user_readings_path(@user)
     else
       render 'new'
     end

@@ -9,14 +9,14 @@
 
   <% if objects.present? %>
     <% objects.each do |object| %>
-      <tr>
+      <tr class=<%= %(reading_row_#{object.id}) %> >
         <td><%= object.title %></td>
         <td><%= "#{object.blood_sugar} mg/dl" %></td>
         <td><%= object.user %></td>
         <td><%= "#{time_ago_in_words(object.created_at)} ago" %></td>
-        <td><%= link_to show_icon, [object.user, object] %></td>
-        <td><%= link_to edit_icon, [:edit, object.user, object] %></td>
-        <td><%= link_to delete_icon, [object.user, object], method: :delete %></td>
+        <td><%= link_to show_icon, [object.user, object], id: "show-reading" %></td>
+        <td><%= link_to edit_icon, [:edit, object.user, object], id: "edit-reading" %></td>
+        <td><%= link_to delete_icon, [object.user, object], method: :delete, id: "delete-reading" %></td>
       </tr>
     <% end %>
   <% else %>
