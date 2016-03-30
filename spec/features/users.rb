@@ -3,12 +3,7 @@ require 'rails_helper'
 RSpec.feature "Users" do
   before(:each) do
     activate_authlogic
-    @newUser = User.new(
-      id: '1',
-      email: 'hooa@aol.com',
-      password: 'secret1',
-      password_confirmation: 'secret1'
-    )
+    @newUser = create :user
   end
 
   describe "the user creation process" do
@@ -42,7 +37,7 @@ RSpec.feature "Users" do
     end
   end
 
-  describe "the users as a 'resource' do
+  describe "the users as a 'resource'" do
     pending "add some examples to (or delete) #{__FILE__}"
     # view
     # edit

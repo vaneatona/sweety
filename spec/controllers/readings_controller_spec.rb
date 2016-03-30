@@ -31,6 +31,7 @@ RSpec.describe ReadingsController do
       expect(assigns(:reading)).to eq(newUser.readings.last)
       expect(response).to render_template(:show)
     end
+
   end
 
   describe "GET #new" do

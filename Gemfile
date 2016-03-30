@@ -54,8 +54,11 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'factory_girl_rails'
   gem 'launchy'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
+  # gem 'selenium-webdriver'
+
 end
 
 group :development do
