@@ -1,9 +1,9 @@
-== README
+== Sweety
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A sample application for keeping track of daily blood glucose levels and
+creating various reports from that information.
 
-Things you may want to cover:
+Technologies Used:
 
 * Ruby version
   * ruby 2.0.0
@@ -26,7 +26,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
