@@ -4,8 +4,9 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    @user_session = UserSession.new(user_session_params)
-    if @user_session.save
+    user_session = UserSession.new(user_session_params)
+
+    if user_session.save
       flash[:success] = "Welcome back!"
       redirect_to user_readings_path(current_user)
     else

@@ -34,7 +34,6 @@ class ReadingsController < ApplicationController
     # Retrieve the user this is being created for with params[:post_id]
     # May not always be current_user
     @user = User.find(params[:user_id])
-
     @reading = @user.readings.build(reading_params)
 
     # Check for over daily limit
