@@ -16,13 +16,11 @@ class ReadingsController < ApplicationController
     # May not always be current_user
     @user = User.find(params[:user_id])
 
-    # Check for over daily limit
-    if error = Reading.over_daily_readings_limit(@user)
-      redirect_to user_readings_path(@user), error
-    else
-      # It's good, we proceed with creation
-      @reading = @user.readings.build
-    end
+    # Check for over daily limit: Redirects if true
+    check_over_daily_readings_limit(@user) and return
+
+    # It's good, we proceed with creation
+    @reading = @user.readings.build
   end
 
   def edit
@@ -34,16 +32,18 @@ class ReadingsController < ApplicationController
     # Retrieve the user this is being created for with params[:post_id]
     # May not always be current_user
     @user = User.find(params[:user_id])
+
+    # Check for over daily limit: Redirects if true
+    check_over_daily_readings_limit(@user) and return
+
     @reading = @user.readings.build(reading_params)
 
-    # Check for over daily limit
-    if error = Reading.over_daily_readings_limit(@user)
-      redirect_to user_readings_path(@user), error
-    elsif @reading.save
+    if @reading.save
       redirect_to user_readings_path(@user)
     else
       render 'new'
     end
+
   end
 
   def update
@@ -54,6 +54,7 @@ class ReadingsController < ApplicationController
     else
       render 'edit'
     end
+
   end
 
   def destroy
@@ -61,6 +62,15 @@ class ReadingsController < ApplicationController
     @reading.destroy
 
     redirect_to user_readings_path
+  end
+
+  def check_over_daily_readings_limit(user)
+    if error = Reading.over_daily_readings_limit(user)
+      redirect_to user_readings_path(user), error
+    else
+      return false
+    end
+
   end
 
   private
