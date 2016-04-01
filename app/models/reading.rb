@@ -13,7 +13,7 @@ class Reading < ActiveRecord::Base
 
   def self.over_daily_readings_limit(user)
     if user.readings.daily_range(Time.now).count >= MAX_READINGS
-      return stuff = :flash => { :error => ERROR_MESSAGE }
+      return :flash => { :error => ERROR_MESSAGE }
     end
   end
 
