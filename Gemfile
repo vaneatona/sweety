@@ -38,7 +38,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'scrypt'
 
 # Databases and stuff
-gem 'mysql2'
+# gem 'mysql2'
 
 # Allows using ENV files, rather than putting passwords in git
 gem 'figaro'
